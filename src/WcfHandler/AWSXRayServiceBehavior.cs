@@ -9,11 +9,12 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using Amazon.XRay.Recorder.Core;
 using Amazon.XRay.Recorder.Core.Internal.Entities;
+using Amazon.XRay.Recorder.Core.Internal.Utils;
 using Amazon.XRay.Recorder.Core.Sampling;
 
 namespace Kralizek.XRayRecorder
 {
-    public class AWSXRayServiceBehavior  : IServiceBehavior
+    public class AWSXRayServiceBehavior : IServiceBehavior
     {
         private readonly string _segmentName;
 
@@ -48,7 +49,9 @@ namespace Kralizek.XRayRecorder
 
             public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
             {
-                var rawHeader = request.Headers.GetHeader<string>(TraceHeader.HeaderKey, "amzn");
+                var recorder = AWSXRayRecorder.Instance;
+
+                var rawHeader = FindHeader(request.Headers);
 
                 try
                 {
@@ -62,25 +65,69 @@ namespace Kralizek.XRayRecorder
                         };
                     }
 
-                    if (!AWSXRayRecorder.Instance.IsTracingDisabled())
+                    if (traceHeader.Sampled == SampleDecision.Unknown || traceHeader.Sampled == SampleDecision.Requested)
                     {
-                        AWSXRayRecorder.Instance.BeginSegment(_segmentName, traceHeader.RootTraceId, traceHeader.ParentId, traceHeader.Sampled);
+                        var host = request.Headers.To.Host;
+                        var path = request.Headers.To.PathAndQuery;
+                        var method = request.Headers.To.Scheme;
 
-                        AWSXRayRecorder.Instance.AddAnnotation("MessageId", request.Headers.MessageId.ToString());
-                        AWSXRayRecorder.Instance.AddAnnotation("Action", request.Headers.Action);
+                        traceHeader.Sampled = recorder.SamplingStrategy.Sample(host, path, method);
                     }
+
+                    if (!recorder.IsTracingDisabled())
+                    {
+                        recorder.BeginSegment(_segmentName, traceHeader.RootTraceId, traceHeader.ParentId, traceHeader.Sampled);
+                        recorder.AddAnnotation("Action", request.Headers.Action);
+
+                        if (request.Headers.MessageId != null)
+                        {
+                            recorder.AddAnnotation("MessageId", request.Headers.MessageId.ToString());
+                        }
+
+                        var entity = TraceContext.GetEntity();
+
+                        return entity;
+                    }
+
+                    return null;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error: {ex}");
+                    return null;
+                }
+            }
+
+            private string FindHeader(MessageHeaders headers)
+            {
+                if (headers.FindHeader(TraceHeader.HeaderKey, AWSConstants.TraceHeaderNamespace) >= 0)
+                {
+                    return headers.GetHeader<string>(TraceHeader.HeaderKey, AWSConstants.TraceHeaderNamespace);
                 }
 
-                return null;
+                return string.Empty;
             }
 
             public void BeforeSendReply(ref Message reply, object correlationState)
             {
-                AWSXRayRecorder.Instance.EndSegment();
+                if (correlationState is Entity entity)
+                {
+                    TraceContext.SetEntity(entity);
+
+                    if (reply.IsFault)
+                    {
+                        AWSXRayRecorder.Instance.MarkError();
+                    }
+
+                    AWSXRayRecorder.Instance.EndSegment();
+
+                    if (TraceHeader.TryParse(entity, out var header) && header.Sampled == SampleDecision.Sampled)
+                    {
+                        var typedHeader = new MessageHeader<string>(header.ToString());
+                        var untypedHeader = typedHeader.GetUntypedHeader(TraceHeader.HeaderKey, AWSConstants.TraceHeaderNamespace);
+
+                        reply.Headers.Add(untypedHeader);
+                    }
+                }
             }
         }
 

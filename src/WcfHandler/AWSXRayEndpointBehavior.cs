@@ -39,7 +39,7 @@ namespace Kralizek.XRayRecorder
                     if (TraceHeader.TryParse(TraceContext.GetEntity(), out var header))
                     {
                         var typedHeader = new MessageHeader<string>(header.ToString());
-                        var untypedHeader = typedHeader.GetUntypedHeader(TraceHeader.HeaderKey, "amzn");
+                        var untypedHeader = typedHeader.GetUntypedHeader(TraceHeader.HeaderKey, AWSConstants.TraceHeaderNamespace);
 
                         request.Headers.Add(untypedHeader);
                     }
