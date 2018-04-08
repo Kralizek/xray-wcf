@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\WcfHandler\WcfHandler.csproj" />
+    <ProjectReference Include="..\..\..\src\AWSXRayRecorder.Handlers.ServiceModel\AWSXRayRecorder.Handlers.ServiceModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

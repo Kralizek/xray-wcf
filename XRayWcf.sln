@@ -4,7 +4,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9796A282-E20D-4AB6-9E51-7E2835014A6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WcfHandler", "src\WcfHandler\WcfHandler.csproj", "{779872AF-D2B5-4BF9-96E7-C74787150CCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWSXRayRecorder.Handlers.ServiceModel", "src\AWSXRayRecorder.Handlers.ServiceModel\AWSXRayRecorder.Handlers.ServiceModel.csproj", "{779872AF-D2B5-4BF9-96E7-C74787150CCD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{374B5266-6FF0-46A9-A3C8-E5B316CB729A}"
 EndProject
