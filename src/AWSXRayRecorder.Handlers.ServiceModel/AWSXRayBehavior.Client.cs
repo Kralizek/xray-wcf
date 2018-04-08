@@ -5,8 +5,10 @@ using Kralizek.XRayRecorder.Internal;
 
 namespace Kralizek.XRayRecorder
 {
-    public class AWSXRayEndpointBehavior : IEndpointBehavior
+    public partial class AWSXRayBehavior : IEndpointBehavior
     {
+        #region IEndpointBehavior
+
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters) { }
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
@@ -18,5 +20,7 @@ namespace Kralizek.XRayRecorder
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) { }
 
         public void Validate(ServiceEndpoint endpoint) { }
+
+        #endregion
     }
 }

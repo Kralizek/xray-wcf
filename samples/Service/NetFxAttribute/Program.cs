@@ -41,7 +41,7 @@ namespace NetFxAttribute
         }
     }
 
-    [AWSXRayServiceBehavior]
+    [AWSXRayBehavior]
     [ServiceBehavior(Name = "MyTest")]
     public class Service : IService
     {

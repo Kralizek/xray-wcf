@@ -25,7 +25,7 @@ namespace NetFxInline
                 };
 
                 host.Description.Behaviors.Add(smb);
-                host.Description.Behaviors.Add(new AWSXRayServiceBehavior());
+                host.Description.Behaviors.Add(new AWSXRayBehavior());
 
                 host.Open();
 
