@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFxInline", "samples\Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFxAttribute", "samples\Service\NetFxAttribute\NetFxAttribute.csproj", "{8DBC2901-6FC8-46E6-93A7-00D73F333964}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFxConfiguration", "samples\Service\NetFxConfiguration\NetFxConfiguration.csproj", "{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,18 @@ Global
 		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x64.Build.0 = Release|Any CPU
 		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x86.ActiveCfg = Release|Any CPU
 		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x86.Build.0 = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|x64.Build.0 = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +83,7 @@ Global
 		{2722F768-122C-4A56-9431-9CF4EF2BAADF} = {374B5266-6FF0-46A9-A3C8-E5B316CB729A}
 		{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE} = {2722F768-122C-4A56-9431-9CF4EF2BAADF}
 		{8DBC2901-6FC8-46E6-93A7-00D73F333964} = {2722F768-122C-4A56-9431-9CF4EF2BAADF}
+		{3E24F241-3ED7-468D-A07D-BD2C8FD2E772} = {2722F768-122C-4A56-9431-9CF4EF2BAADF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1FE73A8-A9B6-4500-AED6-8D7238D732FD}
