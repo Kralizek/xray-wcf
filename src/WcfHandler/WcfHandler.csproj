@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <RootNamespace>Kralizek.XRayRecorder</RootNamespace>
+    <AssemblyName>Kralizek.AWSXRayRecorder.Handlers.ServiceModel</AssemblyName>
+
+    <!-- NuGet -->
+    <PackageId>Kralizek.AWSXRayRecorder.Handlers.ServiceModel</PackageId>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Kralizek/xray-wcf/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Kralizek/xray-wcf</PackageProjectUrl>
+    <PackageVersion>1.0.0-beta</PackageVersion>
+    <Authors>Renato Golia</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="AWSXRayRecorder.Core" Version="2.2.0-beta" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+    <DefineConstants>NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+      <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
+      <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+</Project>
