@@ -16,8 +16,6 @@ namespace Kralizek.XRayRecorder.Internal
             {
                 TraceContext.SetEntity(context.Entity);
 
-                //AWSXRayRecorder.Instance.EndSubsegment();
-
                 if (context.RequiresSegmentTermination)
                 {
                     AWSXRayRecorder.Instance.EndSegment();
@@ -46,8 +44,6 @@ namespace Kralizek.XRayRecorder.Internal
 
                     requiresSegmentTermination = true;
                 }
-
-                //instance.BeginSubsegment($"WCF to {request.Headers.To}");
 
                 var typedHeader = new MessageHeader<string>(traceHeader.ToString());
                 var untypedHeader = typedHeader.GetUntypedHeader(TraceHeader.HeaderKey, AWSConstants.TraceHeaderNamespace);

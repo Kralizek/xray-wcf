@@ -33,9 +33,17 @@ namespace NetFxConfiguration
             return Task.FromResult(null as Contact);
         }
 
-        public Task<Contact[]> ReturnsEmptyAsync()
+        public Task<Contact[]> ReturnsSomethingAsync()
         {
-            return Task.FromResult(new Contact[0]);
+            return Task.FromResult(new[]
+            {
+                new Contact
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Renato",
+                    LastName = "Golia"
+                }
+            });
         }
 
         public Task<Contact> ThrowSomething()

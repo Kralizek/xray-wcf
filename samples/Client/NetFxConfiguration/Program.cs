@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 using Contracts;
-using Kralizek.XRayRecorder;
 
 namespace NetFxConfiguration
 {
@@ -18,20 +17,26 @@ namespace NetFxConfiguration
 
                 client = channelFactory.CreateChannel();
 
-                var items = await client.ReturnsEmptyAsync();
+                var items = await client.ReturnsSomethingAsync();
 
                 (client as IClientChannel).Close();
 
                 Console.WriteLine($"Received {items.Length} items");
+
+                foreach (var contact in items)
+                {
+                    Console.WriteLine($"\t{contact.FirstName} {contact.LastName}");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
 
                 (client as IClientChannel).Abort();
-                
-                //throw;
             }
+
+            Console.WriteLine("Press <ENTER> to exit");
+            Console.ReadLine();
         }
     }
 }

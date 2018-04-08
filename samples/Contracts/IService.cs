@@ -13,6 +13,6 @@ namespace Contracts
         Task<Contact> ThrowSomething();
 
         [OperationContract]
-        Task<Contact[]> ReturnsEmptyAsync();
+        Task<Contact[]> ReturnsSomethingAsync();
     }
 }
