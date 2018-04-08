@@ -14,7 +14,7 @@ namespace NetFxInline
             {
                 new Uri("http://localhost:8000/"),
                 new Uri("net.tcp://localhost:8001"),
-                new Uri("net.pipe://localhost/contact"),
+                new Uri("net.pipe://localhost/xraytest"),
             };
 
             using (ServiceHost host = new ServiceHost(typeof(Service), baseAddresses))
