@@ -59,7 +59,7 @@ namespace Kralizek.XRayRecorder.Internal
 
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

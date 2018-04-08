@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
+using Contracts;
 using Kralizek.XRayRecorder;
 
 namespace NetFxAttribute

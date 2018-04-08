@@ -1,0 +1,6 @@
+{
+    "XRay": {
+        "AWSXRayPlugins": "EC2Plugin",
+        "SamplingRuleManifest": "sampling-rules.json"
+    }
+}

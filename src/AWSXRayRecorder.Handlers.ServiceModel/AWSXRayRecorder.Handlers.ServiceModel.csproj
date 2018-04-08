@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
     <RootNamespace>Kralizek.XRayRecorder</RootNamespace>
     <AssemblyName>Kralizek.AWSXRayRecorder.Handlers.ServiceModel</AssemblyName>
 
@@ -25,7 +25,7 @@
       <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
       <Reference Include="System.ServiceModel" />
   </ItemGroup>
 

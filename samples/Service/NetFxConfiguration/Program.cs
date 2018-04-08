@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using System.Threading.Tasks;
-using Kralizek.XRayRecorder;
+using Contracts;
 
 namespace NetFxConfiguration
 {

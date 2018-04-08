@@ -7,10 +7,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\AWSXRayRecorder.Handlers.ServiceModel\AWSXRayRecorder.Handlers.ServiceModel.csproj" />
+    <ProjectReference Include="..\..\Contracts\Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
       <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sampling-rules.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
