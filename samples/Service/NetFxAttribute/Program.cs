@@ -4,7 +4,7 @@ using System.ServiceModel.Description;
 using System.Threading.Tasks;
 using Kralizek.XRayRecorder;
 
-namespace NetFxInline
+namespace NetFxAttribute
 {
     class Program
     {
@@ -25,7 +25,6 @@ namespace NetFxInline
                 };
 
                 host.Description.Behaviors.Add(smb);
-                host.Description.Behaviors.Add(new AWSXRayServiceBehavior());
 
                 host.Open();
 
@@ -42,6 +41,8 @@ namespace NetFxInline
         }
     }
 
+    [AWSXRayServiceBehavior]
+    [ServiceBehavior(Name = "MyTest")]
     public class Service : IService
     {
         public Task<Contact> ReturnsNullAsync()

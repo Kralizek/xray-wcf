@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{2722
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFxInline", "samples\Service\NetFxInline\NetFxInline.csproj", "{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFxAttribute", "samples\Service\NetFxAttribute\NetFxAttribute.csproj", "{8DBC2901-6FC8-46E6-93A7-00D73F333964}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,18 @@ Global
 		{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE}.Release|x64.Build.0 = Release|Any CPU
 		{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE}.Release|x86.Build.0 = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|x64.Build.0 = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Debug|x86.Build.0 = Debug|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x64.ActiveCfg = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x64.Build.0 = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x86.ActiveCfg = Release|Any CPU
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +68,7 @@ Global
 		{779872AF-D2B5-4BF9-96E7-C74787150CCD} = {9796A282-E20D-4AB6-9E51-7E2835014A6D}
 		{2722F768-122C-4A56-9431-9CF4EF2BAADF} = {374B5266-6FF0-46A9-A3C8-E5B316CB729A}
 		{62DA4329-F3AF-4362-92DF-C4BA85F1D4DE} = {2722F768-122C-4A56-9431-9CF4EF2BAADF}
+		{8DBC2901-6FC8-46E6-93A7-00D73F333964} = {2722F768-122C-4A56-9431-9CF4EF2BAADF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1FE73A8-A9B6-4500-AED6-8D7238D732FD}
