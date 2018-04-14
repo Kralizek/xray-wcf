@@ -37,8 +37,9 @@ Task("Test")
     {
         var settings = new DotNetCoreTestSettings
         {
-            NoBuild = true,
+            NoBuild = false,
             NoRestore = true,
+            Configuration = "Debug"
         };
 
         DotNetCoreTest(file.FullPath, settings);
