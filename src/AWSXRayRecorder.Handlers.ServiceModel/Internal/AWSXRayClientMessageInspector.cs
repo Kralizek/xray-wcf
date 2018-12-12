@@ -3,7 +3,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using Amazon.XRay.Recorder.Core;
 using Amazon.XRay.Recorder.Core.Internal.Entities;
-using Amazon.XRay.Recorder.Core.Internal.Utils;
 using Amazon.XRay.Recorder.Core.Sampling;
 
 namespace Kralizek.XRayRecorder.Internal
@@ -14,11 +13,13 @@ namespace Kralizek.XRayRecorder.Internal
         {
             if (correlationState is RecordingContext context)
             {
-                TraceContext.SetEntity(context.Entity);
+                var instance = AWSXRayRecorder.Instance;
+
+                instance.SetEntity(context.Entity);
 
                 if (context.RequiresSegmentTermination)
                 {
-                    AWSXRayRecorder.Instance.EndSegment();
+                    instance.EndSegment();
                 }
             }
         }
@@ -31,7 +32,7 @@ namespace Kralizek.XRayRecorder.Internal
             {
                 bool requiresSegmentTermination = false;
 
-                if (!TraceContext.IsEntityPresent() || !TraceHeader.TryParse(TraceContext.GetEntity(), out var traceHeader))
+                if (!instance.IsEntityPresent() || !TraceHeader.TryParse(instance.GetEntity(), out var traceHeader))
                 {
                     traceHeader = new TraceHeader
                     {
@@ -40,7 +41,7 @@ namespace Kralizek.XRayRecorder.Internal
                         Sampled = SampleDecision.Unknown
                     };
 
-                    instance.BeginSegment("Temporary", traceHeader.RootTraceId, traceHeader.ParentId, traceHeader.Sampled);
+                    instance.BeginSegment("Temporary", traceHeader.RootTraceId, traceHeader.ParentId);
 
                     requiresSegmentTermination = true;
                 }
@@ -50,7 +51,7 @@ namespace Kralizek.XRayRecorder.Internal
 
                 request.Headers.Add(untypedHeader);
 
-                return new RecordingContext(TraceContext.GetEntity(), requiresSegmentTermination);
+                return new RecordingContext(instance.GetEntity(), requiresSegmentTermination);
             }
 
             return null;

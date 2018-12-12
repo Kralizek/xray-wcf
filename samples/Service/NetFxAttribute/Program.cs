@@ -53,6 +53,8 @@ namespace NetFxAttribute
 
         public Task<Contact[]> ReturnsSomethingAsync()
         {
+            Console.WriteLine("Someone called");
+
             return Task.FromResult(new[]
             {
                 new Contact

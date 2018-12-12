@@ -6,7 +6,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using Amazon.XRay.Recorder.Core;
 using Amazon.XRay.Recorder.Core.Internal.Entities;
-using Amazon.XRay.Recorder.Core.Internal.Utils;
 using Amazon.XRay.Recorder.Core.Sampling;
 
 namespace Kralizek.XRayRecorder.Internal
@@ -22,7 +21,7 @@ namespace Kralizek.XRayRecorder.Internal
 
         public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
         {
-            var recorder = AWSXRayRecorder.Instance;
+            var instance = AWSXRayRecorder.Instance;
 
             var rawHeader = FindHeader(request.Headers);
 
@@ -41,18 +40,25 @@ namespace Kralizek.XRayRecorder.Internal
                 if (traceHeader.Sampled == SampleDecision.Unknown || traceHeader.Sampled == SampleDecision.Requested)
                 {
                     var host = request.Headers.To.Host;
-                    var path = request.Headers.To.PathAndQuery;
+                    var path = request.Headers.To;
                     var method = request.Headers.To.Scheme;
 
-                    traceHeader.Sampled = recorder.SamplingStrategy.Sample(host, path, method);
+                    var samplingInput = new SamplingInput
+                    {
+                        Host = host, Method = method, Url = path.ToString()
+                    };
+
+                    var samplingResponse = instance.SamplingStrategy.ShouldTrace(samplingInput);
+
+                    traceHeader.Sampled = samplingResponse.SampleDecision;
                 }
 
-                if (!recorder.IsTracingDisabled())
+                if (!instance.IsTracingDisabled())
                 {
-                    recorder.BeginSegment(_segmentName, traceHeader.RootTraceId, traceHeader.ParentId, traceHeader.Sampled);
-                    recorder.AddWcfInformation(ref request, channel, instanceContext);
+                    instance.BeginSegment(_segmentName, traceHeader.RootTraceId, traceHeader.ParentId);
+                    instance.AddWcfInformation(ref request, channel, instanceContext);
 
-                    var entity = TraceContext.GetEntity();
+                    var entity = instance.GetEntity();
 
                     return entity;
                 }
@@ -79,14 +85,16 @@ namespace Kralizek.XRayRecorder.Internal
         {
             if (correlationState is Entity entity)
             {
-                TraceContext.SetEntity(entity);
+                var instance = AWSXRayRecorder.Instance;
+
+                instance.SetEntity(entity);
 
                 if (reply.IsFault)
                 {
-                    AWSXRayRecorder.Instance.MarkError();
+                    instance.MarkError();
                 }
 
-                AWSXRayRecorder.Instance.EndSegment();
+                instance.EndSegment();
 
                 if (TraceHeader.TryParse(entity, out var header) && header.Sampled == SampleDecision.Sampled)
                 {
